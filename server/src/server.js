@@ -1,6 +1,4 @@
-// import and config dotenv
-import dotenv from "dotenv"
-dotenv.config();
+import "dotenv/config"
 
 // import statemenets
 import app from "./app.js";

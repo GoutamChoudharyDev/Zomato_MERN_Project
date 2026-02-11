@@ -6,7 +6,7 @@ import { logoutUser } from "../controllers/user.controller.js";
 // instance of Router
 const router = Router();
 
-// routes...
+// auth api
 router.post("/register", registerUser)
 router.post("/login", loginUser)
 router.get("/logout", logoutUser)
