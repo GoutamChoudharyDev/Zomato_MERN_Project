@@ -60,5 +60,26 @@ const createFood = async (req, res) => {
 
 }
 
+// Get food controller
+const getFood = async (req, res) => {
+    try {
+        // get details(food) from db
+        const foodItem = await Food.find({});
+
+        return res.status(200).json({
+            message: "Food items fetched successfully",
+            foodItem
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Internal server error"
+        })
+    }
+}
+
 // export
-export { createFood }
+export {
+    createFood,
+    getFood
+}
