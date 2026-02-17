@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../services/api";
+import api from "../../services/api";
 import { toast } from "react-toastify";
 
 const FoodPartnerLogin = () => {
@@ -22,7 +22,7 @@ const FoodPartnerLogin = () => {
 
             toast.success(res.data.message || "Login successful!");
 
-            navigate("/")
+            navigate("/food-partner/dashboard")
         } catch (error) {
             toast.error(error.response?.data?.message || "Login failed");
         }

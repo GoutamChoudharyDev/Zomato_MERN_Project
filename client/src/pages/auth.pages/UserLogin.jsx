@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../services/api";
+import api from "../../services/api";
 import { toast } from "react-toastify";
 
-const FoodPartnerRegister = () => {
+const UserLogin = () => {
     // usestates
-    const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
 
     // navigate
@@ -15,18 +14,18 @@ const FoodPartnerRegister = () => {
     // handle submit
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
-            const res = await api.post("/api/auth/food-partner/register", {
-                fullName,
+            const res = await api.post("/api/auth/user/login", {
                 email,
                 password
             })
 
-            toast.success(res.data.message || "Registration successful!");
+            toast.success(res.data.message || "Login successful!");
 
-            navigate("/food-partner/login");
+            navigate("/")
         } catch (error) {
-            toast.error(error.response?.data?.message || "Registration failed");
+            toast.error(error.response?.data?.message || "Login failed");
         }
     }
 
@@ -35,30 +34,14 @@ const FoodPartnerRegister = () => {
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Become a Partner</h2>
-                    <p className="text-gray-600">Register your restaurant and start selling</p>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
+                    <p className="text-gray-600">Sign in to order your favorite food</p>
                 </div>
 
                 {/* Form */}
                 <form
                     onSubmit={handleSubmit}
                     className="space-y-5">
-                    {/* Restaurant Name */}
-                    <div>
-                        <label htmlFor="restaurantName" className="block text-sm font-medium text-gray-700 mb-2">
-                            Full Name
-                        </label>
-                        <input
-                            id="restaurantName"
-                            name="restaurantName"
-                            type="text"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            placeholder="Enter your restaurant name"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
-                        />
-                    </div>
-
                     {/* Email */}
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -86,9 +69,23 @@ const FoodPartnerRegister = () => {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Create a strong password"
+                            placeholder="Enter your password"
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition"
                         />
+                    </div>
+
+                    {/* Remember Me & Forgot Password */}
+                    <div className="flex items-center justify-between">
+                        <label className="flex items-center">
+                            <input
+                                type="checkbox"
+                                className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                            />
+                            <span className="ml-2 text-sm text-gray-700">Remember me</span>
+                        </label>
+                        <Link to="#" className="text-sm text-orange-500 hover:text-orange-600 font-medium">
+                            Forgot password?
+                        </Link>
                     </div>
 
                     {/* Submit Button */}
@@ -96,7 +93,7 @@ const FoodPartnerRegister = () => {
                         type="submit"
                         className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-2 px-4 rounded-lg hover:from-orange-600 hover:to-red-600 transition transform hover:scale-105"
                     >
-                        Register Restaurant
+                        Sign In
                     </button>
                 </form>
 
@@ -106,25 +103,25 @@ const FoodPartnerRegister = () => {
                         <div className="w-full border-t border-gray-300"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                        <span className="px-2 bg-white text-gray-500">Already have an account?</span>
+                        <span className="px-2 bg-white text-gray-500">Don't have an account?</span>
                     </div>
                 </div>
 
-                {/* Login Link */}
+                {/* Register Link */}
                 <Link
-                    to="/food-partner/login"
+                    to="/user/register"
                     className="block w-full text-center bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition"
                 >
-                    Sign In
+                    Create Account
                 </Link>
 
                 {/* Footer */}
                 <div className="mt-6 text-center text-xs text-gray-500">
-                    <p>By registering, you agree to our Partner Terms & Conditions</p>
+                    <p>By signing in, you agree to our Terms & Conditions</p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default FoodPartnerRegister;
+export default UserLogin;

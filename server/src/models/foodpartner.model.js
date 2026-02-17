@@ -6,6 +6,18 @@ const foodPartnerSchema = new Schema({
         type: String,
         required: true,
     },
+    resturantName: {
+        type: String,
+        required: true,
+    },
+    phoneNumber: {
+        type: String,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
@@ -14,7 +26,8 @@ const foodPartnerSchema = new Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+
 }, { timestamps: true })
 
 // create model and export it

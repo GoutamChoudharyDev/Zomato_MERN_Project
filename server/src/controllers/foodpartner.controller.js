@@ -5,9 +5,9 @@ import jwt from "jsonwebtoken";
 // register controller
 const registerFoodPartner = async (req, res) => {
     try {
-        const { fullName, email, password } = req.body;
+        const { fullName, email, password, resturantName, phoneNumber, address } = req.body;
 
-        if (!fullName?.trim() || !email?.trim() || !password?.trim()) {
+        if (!fullName?.trim() || !email?.trim() || !password?.trim() || !resturantName?.trim() || !phoneNumber?.trim() || !address?.trim()) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
@@ -22,6 +22,9 @@ const registerFoodPartner = async (req, res) => {
             fullName,
             email,
             password: hashedPassword,
+            resturantName,
+            phoneNumber,
+            address
         });
 
         return res.status(201).json({
@@ -30,6 +33,9 @@ const registerFoodPartner = async (req, res) => {
                 _id: foodPartner._id,
                 fullName,
                 email,
+                resturantName,
+                phoneNumber,
+                address
             },
         });
     } catch (error) {
